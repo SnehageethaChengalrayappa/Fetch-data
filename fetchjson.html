@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cities of India</title>
+  <body>
+    <h1>Cities of India</h1>
+
+  </body>
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .table th,
+    .table td {
+      padding: 10px;
+      border: 1px solid black;
+    }
+    
+    .table th {
+      background-color: #f2f2f2;
+    }
+    </style>
+
+</head>
+
+<script>
+fetch('https://api.npoint.io/7bbd3a59c401f616bb89')
+.then(response => response.json())
+.then(data => {
+  const tableHeader = document.querySelector('#table-header');
+  const tableBody = document.querySelector('#data');
+
+   // Add table header
+   const headerRow = document.createElement('tr');
+  for (const key in data.data[0]) {
+    const th = document.createElement('th');
+    th.textContent = key;
+    headerRow.appendChild(th);
+  }
+  tableHeader.appendChild(headerRow);
+
+  // Add table data
+  data.data.forEach(itemData => {
+    const row = document.createElement('tr');
+    for (const key in itemData) {
+      const td = document.createElement('td');
+      td.textContent = itemData[key];
+      row.appendChild(td);
+    }
+    tableBody.appendChild(row);
+  });
+});
+
+</script>
+</body> 
+</html>
+
